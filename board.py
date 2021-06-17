@@ -82,16 +82,21 @@ class Board:
             for j in range (0,8):
                 if( self.boardCubes[i][j].checkIfClicked(pos) ):
                     self.boardCubes[self.clickedCubeI][self.clickedCubeJ].isClicked = False
-                    if(self.boardCubes[self.clickedCubeI][self.clickedCubeJ].cubePiece.pieceColor != "None"):
+                    if ( self.boardCubes[self.clickedCubeI][self.clickedCubeJ].containsPiece() ):
                         if(self.clickedCubeI != -1 and self.clickedCubeJ != -1 ):
+                            #Check if the piece can move to the clicked cube
                             if(self.boardCubes[i][j].cubePiece.pieceColor != self.boardCubes[self.clickedCubeI][self.clickedCubeJ].cubePiece.pieceColor):
                                 if(self.boardCubes[self.clickedCubeI][self.clickedCubeJ].cubePiece.movePiece(self.board,i,j,self.clickedCubeI,self.clickedCubeJ)):
                                     self.boardCubes[i][j].cubePiece = self.boardCubes[self.clickedCubeI][self.clickedCubeJ].cubePiece
                                     self.boardCubes[self.clickedCubeI][self.clickedCubeJ].cubePiece = piece.Piece("None","None")
+                                    self.board[self.clickedCubeI][self.clickedCubeJ] = 0
+                                    self.board[i][j] = 1
                                     self.boardCubes[i][j].isClicked = False
                                 else:
                                     self.boardCubes[i][j].isClicked = False
                             else: 
                                 self.boardCubes[i][j].isClicked = False
+                    for k in range(0,8):
+                        print(self.board[k])
                     self.clickedCubeI = i if self.boardCubes[i][j].isClicked else -1
                     self.clickedCubeJ = j if self.boardCubes[i][j].isClicked else -1
