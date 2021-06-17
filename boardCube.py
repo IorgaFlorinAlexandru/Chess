@@ -35,3 +35,8 @@ class boardCube:
             return True
         else: 
             return False
+    def containsPiece(self):
+        if self.cubePiece.pieceColor != "None":
+            return True
+        else:
+            return False
