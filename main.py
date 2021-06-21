@@ -52,6 +52,8 @@ while run:
                 for i in range (0,8):
                     for j in range (0,8):
                         gameBoard.boardCubes[i][j].cubePiece = Piece("None","None")
+                        gameBoard.boardCubes[i][j].cubePiece.firstMove = False
+                        gameBoard.board[i][j] = 0
                 gameBoard.boardCubes[gameBoard.clickedCubeI][gameBoard.clickedCubeJ].isClicked = False
                 gameBoard.clickedCubeI = -1 
                 gameBoard.clickedCubeJ = -1

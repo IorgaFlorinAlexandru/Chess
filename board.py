@@ -14,13 +14,14 @@ class Board:
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0]
     ]
-    clickedCubeI = -1
-    clickedCubeJ = -1
+    clickedCubeI = -5
+    clickedCubeJ = -5
+    playerTurn = "White"
 
     def __init__(self): 
         cubeFiles = [ 'A','B','C','D','E','F','G','H']
         cubeRanks = [ '8','7','6','5','4','3','2','1']
-        self.boardCubes = [[ bCube.boardCube(80, cubeFiles[i-1], cubeRanks[j-1], i*80, j*80, (0,0,0) if i%2==0 and j%2==1 or j%2==0 and i%2==1 else (255,255,255)) for j in range(1,9)] for i in range(1,9)]
+        self.boardCubes = [[ bCube.boardCube(80, cubeFiles[i-1], cubeRanks[j-1], i*80, j*80, (128,128,128) if i%2==0 and j%2==1 or j%2==0 and i%2==1 else (255,255,255)) for j in range(1,9)] for i in range(1,9)]
 
     def initialiseGame(self):
         #Peons
@@ -77,13 +78,19 @@ class Board:
             for j in range (0,8):
                  self.boardCubes[i][j].drawCube(screen)
 
+    def changeTurn(self):
+        if(self.playerTurn == "White"):
+            self.playerTurn = "Black"
+        else:
+            self.playerTurn = "White"
+
     def click(self, pos):  
         for i in range (0,8):
             for j in range (0,8):
                 if( self.boardCubes[i][j].checkIfClicked(pos) ):
-                    self.boardCubes[self.clickedCubeI][self.clickedCubeJ].isClicked = False
-                    if ( self.boardCubes[self.clickedCubeI][self.clickedCubeJ].containsPiece() ):
-                        if(self.clickedCubeI != -1 and self.clickedCubeJ != -1 ):
+                    if(self.clickedCubeI != -1 and self.clickedCubeJ != -1 ):
+                        self.boardCubes[self.clickedCubeI][self.clickedCubeJ].isClicked = False
+                        if ( self.boardCubes[self.clickedCubeI][self.clickedCubeJ].containsPiece(self.playerTurn) ):
                             #Check if the piece can move to the clicked cube
                             if(self.boardCubes[i][j].cubePiece.pieceColor != self.boardCubes[self.clickedCubeI][self.clickedCubeJ].cubePiece.pieceColor):
                                 if(self.boardCubes[self.clickedCubeI][self.clickedCubeJ].cubePiece.movePiece(self.board,i,j,self.clickedCubeI,self.clickedCubeJ)):
@@ -92,11 +99,10 @@ class Board:
                                     self.board[self.clickedCubeI][self.clickedCubeJ] = 0
                                     self.board[i][j] = 1
                                     self.boardCubes[i][j].isClicked = False
+                                    self.changeTurn()
                                 else:
                                     self.boardCubes[i][j].isClicked = False
                             else: 
                                 self.boardCubes[i][j].isClicked = False
-                    # for k in range(0,8):
-                    #     print(self.board[k])
                     self.clickedCubeI = i if self.boardCubes[i][j].isClicked else -1
                     self.clickedCubeJ = j if self.boardCubes[i][j].isClicked else -1
