@@ -66,23 +66,144 @@ class Piece:
 
         #Moving a knight
         if(self.pieceName == "Knight" ):
-            print('horse')
+            if (pieceX == boardX + 1 or pieceX == boardX - 1) and (pieceY == boardY + 2 or pieceY == boardY - 2):
+                return True
+            if (pieceX == boardX + 2 or pieceX == boardX - 2) and (pieceY == boardY + 1 or pieceY == boardY - 1):
+                return True    
             return False
 
         if(self.pieceName == "Bishop" ):
-            print('Preot')
+            copyBoardX = boardX
+            copyBoardY = boardY
+            print(pieceX)
+            print(pieceY)
+            print(boardX)
+            print(boardY)
+            for k in range(0,8):
+                print(board[k])
+            #Moving diagonally
+            #Down right
+            while(boardX != -1 and boardY != -1):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX -= 1
+                boardY -= 1
+            boardX = copyBoardX
+            boardY = copyBoardY
+            #Up right
+            while(boardX != -1 and boardY != 8):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX -= 1
+                boardY += 1
+            boardX = copyBoardX
+            boardY = copyBoardY
+            #Up left
+            while(boardX != 8 and boardY != -8):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX += 1
+                boardY += 1
+            boardX = copyBoardX
+            boardY = copyBoardY
+            #Down left
+            while(boardX != 8 and boardY != -1):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX += 1
+                boardY -= 1
             return False
         
         if(self.pieceName == "Rook" ):
-            print('Turn')
+            copyBoardX = boardX
+            copyBoardY = boardY
+            #Going right
+            while(boardX != -1):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX -= 1
+            boardX = copyBoardX
+            #Going left
+            while(boardX != 8):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX += 1
+            boardX = copyBoardX
+            #Going up
+            while(boardY != 8):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardY += 1
+            copyBoardY = boardY
+            while(boardY != -1):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardY -= 1
+            copyBoardY = boardY
             return False
 
         if(self.pieceName == "Queen" ):
-            print('Quuen')
+            copyBoardX = boardX
+            copyBoardY = boardY
+            #Moving up,down,right and left
+            while(boardX != -1):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX -= 1
+            boardX = copyBoardX
+            #Going left
+            while(boardX != 8):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX += 1
+            boardX = copyBoardX
+            #Going up
+            while(boardY != 8):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardY += 1
+            boardY = copyBoardY
+            while(boardY != -1):
+                if( pieceX == boardX and pieceY == boardY):
+                    return True
+                boardY -= 1
+            boardY = copyBoardY
+            #Moving diagonally
+            #Down right
+            while(boardX != -1 and boardY != -1):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX -= 1
+                boardY -= 1
+            boardX = copyBoardX
+            boardY = copyBoardY
+            #Up right
+            while(boardX != -1 and boardY != 8):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX -= 1
+                boardY += 1
+            boardX = copyBoardX
+            boardY = copyBoardY
+            #Up left
+            while(boardX != 8 and boardY != -8):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX += 1
+                boardY += 1
+            boardX = copyBoardX
+            boardY = copyBoardY
+            #Down left
+            while(boardX != 8 and boardY != -1):
+                if(pieceX == boardX and pieceY == boardY):
+                    return True
+                boardX += 1
+                boardY -= 1
             return False
 
         if(self.pieceName == "King" ):
-            print('Kong')
+            if( pieceX == boardX or pieceX == boardX - 1 or pieceX == boardX + 1  ) and ( pieceY == boardY or pieceY == boardY - 1 or pieceY == boardY + 1  ):
+                return True 
             return False    
 
 
