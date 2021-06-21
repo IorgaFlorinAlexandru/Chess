@@ -96,7 +96,7 @@ class Board:
                                     self.boardCubes[i][j].isClicked = False
                             else: 
                                 self.boardCubes[i][j].isClicked = False
-                    for k in range(0,8):
-                        print(self.board[k])
+                    # for k in range(0,8):
+                    #     print(self.board[k])
                     self.clickedCubeI = i if self.boardCubes[i][j].isClicked else -1
                     self.clickedCubeJ = j if self.boardCubes[i][j].isClicked else -1
